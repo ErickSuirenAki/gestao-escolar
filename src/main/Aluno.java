@@ -7,17 +7,29 @@ public class Aluno extends Usuario{
 	
 
 	private List<Disciplina> disciplinas;
-	private int novoAtributo;
+	private boolean bolsista;
 
 	
-	public Aluno(String nome, String matricula, String cpf, String curso, int novo) {
+	public Aluno(String nome, String matricula, String cpf, String curso, boolean bolsista) {
 		super(nome, matricula, cpf, curso);
-		this.novoAtributo = novo;
 		this.disciplinas = new ArrayList<Disciplina>();
+		this.bolsista = bolsista;
 	}	
 	
 
 	
+	public boolean isBolsista() {
+		return bolsista;
+	}
+
+
+
+	public void setBolsista(boolean bolsista) {
+		this.bolsista = bolsista;
+	}
+
+
+
 	public void realizarMatricula(Disciplina disciplina) {
 		if (this.disciplinas.size() < 6) {
 			this.disciplinas.add(disciplina);
@@ -87,6 +99,18 @@ public class Aluno extends Usuario{
 			}
 		}
 	}
+	
+	@Override	
+	public double calculaSalario(int horas, double valorHora) {
+		if(!isBolsista()) {
+			return 0;
+			
+		}
+			return horas*valorHora;
+		
+	}
+	
+	
 	
 
 }
